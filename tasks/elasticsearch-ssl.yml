@@ -41,7 +41,7 @@
   notify: restart elasticsearch
   register: copy_truststore
 
-- name: Upload SSL/TLS key and certificate
+- name: Upload SSL/TLS key and certificate (Path)
   become: yes
   copy:
     src: "{{ item }}"
@@ -52,12 +52,12 @@
   with_items:
     - "{{ es_ssl_key }}"
     - "{{ es_ssl_certificate }}"
-  when: es_ssl_upload and es_ssl_key and es_ssl_certificate and (es_ssl_key | lenght < 100 and es_ssl_certificate | lenght < 100)
-  #Restart if these change
+  when: es_ssl_upload and es_ssl_key and es_ssl_certificate and es_ssl_key | lenght < 100 and es_ssl_certificate | lenght < 100
+  # Restart if these change
   notify: restart elasticsearch
   register: copy_certificates
 
-- name: Upload SSL/TLS key and certificate
+- name: Upload SSL/TLS key and certificate (Content)
   become: yes
   template:
     src: "{{ item.src }}"
