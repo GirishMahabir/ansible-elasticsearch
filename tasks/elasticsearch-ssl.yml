@@ -89,7 +89,7 @@
     mode: "640"
   #Restart if this changes
   notify: restart elasticsearch
-  when: es_ssl_upload and ( es_ssl_certificate_authority is defined ) and ( es_ssl_certificate_authority | length > 0 )
+  when: es_ssl_upload and ( es_ssl_certificate_authority is defined ) and ( es_ssl_certificate_authority | length < 100 )
 
 - name: Upload SSL Certificate Authority (Content)
   become: yes
