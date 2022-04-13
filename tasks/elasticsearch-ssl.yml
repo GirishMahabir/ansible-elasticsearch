@@ -79,19 +79,19 @@
   notify: restart elasticsearch
   register: copy_certificates
 
-# - name: Upload SSL Certificate Authority
-#   become: yes
-#   copy:
-#     src: "{{ es_ssl_certificate_authority }}"
-#     dest: "{{ es_ssl_certificate_path }}/{{ es_ssl_certificate_authority | basename }}"
-#     owner: "{{ es_user }}"
-#     group: "{{ es_group }}"
-#     mode: "640"
-#   #Restart if this changes
-#   notify: restart elasticsearch
-#   when: es_ssl_upload and (es_ssl_certificate_authority is defined) and (es_ssl_certificate_authority|length > 0)
+- name: Upload SSL Certificate Authority (Path)
+  become: yes
+  copy:
+    src: "{{ es_ssl_certificate_authority }}"
+    dest: "{{ es_ssl_certificate_path }}/{{ es_ssl_certificate_authority | basename }}"
+    owner: "{{ es_user }}"
+    group: "{{ es_group }}"
+    mode: "640"
+  #Restart if this changes
+  notify: restart elasticsearch
+  when: es_ssl_upload and ( es_ssl_certificate_authority is defined ) and ( es_ssl_certificate_authority | length > 0 )
 
-- name: Upload SSL Certificate Authority
+- name: Upload SSL Certificate Authority (Content)
   become: yes
   template:
     src: "ca.crt.j2"
