@@ -101,7 +101,7 @@
     mode: "640"
   #Restart if this changes
   notify: restart elasticsearch
-  when: es_ssl_upload and (es_ssl_certificate_authority is defined) and (es_ssl_certificate_authority.content|length > 256)
+  when: es_ssl_upload and (es_ssl_certificate_authority is defined) and (es_ssl_certificate_authority | length > 256)
 
 - name: Set keystore password
   become: yes
