@@ -52,7 +52,7 @@
   with_items:
     - "{{ es_ssl_key }}"
     - "{{ es_ssl_certificate }}"
-  when: es_ssl_upload and es_ssl_key and es_ssl_certificate and es_ssl_key | lenght < 100 and es_ssl_certificate | lenght < 100
+  when: es_ssl_upload and es_ssl_key and es_ssl_certificate and es_ssl_key | length < 100 and es_ssl_certificate | length < 100
   # Restart if these change
   notify: restart elasticsearch
   register: copy_certificates
@@ -74,7 +74,7 @@
       src: "elasticsearch.crt.j2",
       dest: "elasticsearch.crt"
     } 
-  when: es_ssl_upload and es_ssl_key and es_ssl_certificate and es_ssl_key | lenght > 256 and es_ssl_certificate | length > 256
+  when: es_ssl_upload and es_ssl_key and es_ssl_certificate and es_ssl_key | length > 256 and es_ssl_certificate | length > 256
   #Restart if these change
   notify: restart elasticsearch
   register: copy_certificates
